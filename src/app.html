@@ -97,13 +97,18 @@
                     <label>Quantity:</label>
                   </div>
                   <div class="cell">
-                    <input type="number" v-model="inventory.pineapples" />
+                    <input
+                      type="number"
+                      v-model.number="inventory.pineapples"
+                    />
                   </div>
                 </div>
               </form>
             </div>
             <div class="card-footer">
-              <button class="btn btn-light">Add to cart</button>
+              <button @click="addToCart('pineapples')" class="btn btn-light">
+                Add to cart
+              </button>
             </div>
           </div>
 
@@ -131,13 +136,15 @@
                     <label>Quantity:</label>
                   </div>
                   <div class="cell">
-                    <input type="number" v-model="inventory.cherries" />
+                    <input type="number" v-model.number="inventory.cherries" />
                   </div>
                 </div>
               </form>
             </div>
             <div class="card-footer">
-              <button class="btn btn-light">Add to cart</button>
+              <button @click="addToCart('cherries')" class="btn btn-light">
+                Add to cart
+              </button>
             </div>
           </div>
         </div>
@@ -145,5 +152,32 @@
 
       <footer></footer>
     </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      let app = Vue.createApp({
+        data() {
+          return {
+            inventory: {
+              carrots: 0,
+              pineapples: 0,
+              cherries: 0,
+            },
+            cart: {
+              carrots: 0,
+              pineapples: 0,
+              cherries: 0,
+            },
+          };
+        },
+        methods: {
+          addToCart(type) {
+            this.cart[type] += this.inventory[type];
+            console.log(this.cart);
+          },
+        },
+      });
+
+      app.mount("#app");
+    </script>
   </body>
 </html>
